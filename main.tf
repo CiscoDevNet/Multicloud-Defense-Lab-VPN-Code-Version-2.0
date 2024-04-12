@@ -197,6 +197,13 @@ resource "aws_route" "ext_default_route" {
   gateway_id             = aws_internet_gateway.int_gw.id
 }
 
+resource "aws_route" "inside_default_route" {
+  route_table_id         = aws_route_table.asa_inside_route.id
+  destination_cidr_block = "0.0.0.0/0"
+  # gateway_id             = aws_internet_gateway.int_gw.id
+  network_interface_id = aws_network_interface.asa_inside.id
+}
+
 resource "aws_route_table_association" "outside_association" {
 #   count          = var.outside_subnet_cidr != null ? length(var.outside_subnet_cidr) : length(var.outside_subnet_name)
    subnet_id      = aws_subnet.asa_outside_subnet.id
@@ -287,7 +294,7 @@ resource "aws_key_pair" "sshkeypair" {
 
 resource "aws_instance" "asav" {
   ami                 = data.aws_ami.asav.id
-  instance_type = "c5.2xlarge"
+  instance_type = "c5.xlarge"
    key_name      = "pod${var.pod_number}-keypair"
 
   network_interface {
@@ -314,7 +321,7 @@ resource "aws_instance" "asav" {
 
 
   tags = {
-    Name = "pod${var.pod_number}-ASAv"
+    Name = "pod${var.pod_number}-asav"
   }
 }
 
@@ -371,7 +378,7 @@ resource "aws_instance" "AppMachine" {
 
 
   tags = {
-    Name = "pod${var.pod_number}-test-vm"
+    Name = "pod${var.pod_number}-dcapp1"
     # role = count.index == 0 ? "pod${var.pod_number}-prod" : "pod${var.pod_number}-shared"
   }
 }
