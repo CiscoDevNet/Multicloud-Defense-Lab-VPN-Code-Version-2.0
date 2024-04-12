@@ -13,8 +13,7 @@ interface tengig 0/1
     ip address 172.16.${pod_number}.42 255.255.255.224
     no shutdown
 route outside 0.0.0.0 0.0.0.0 172.16.${pod_number}.1 1
-route inside 10.0.0.0 255.0.0.0 172.16.${pod_number}.42 1
-hostname ${pod_number}-asa01
+hostname pod${pod_number}-asa01
 crypto key generate rsa mod 2048 noconfirm
 
 dns domain-lookup outside
@@ -32,7 +31,7 @@ http 0.0.0.0 0.0.0.0 management
 http 0.0.0.0 0.0.0.0 outside
 
 enable password Cisco@159
-username admin password Cisco@159 privilege 15
+username pod${pod_number}-admin password Cisco@159 privilege 15
 
 aaa authentication ssh console LOCAL
 aaa authentication http console LOCAL
