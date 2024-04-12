@@ -1,2 +1,1 @@
-# devnet-template
-Template for creating new repos in CiscoDevNet
+# Multicloud-Defense-Lab-VPN-Code-Version-2.0

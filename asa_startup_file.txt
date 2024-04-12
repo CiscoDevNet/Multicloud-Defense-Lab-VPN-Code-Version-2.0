@@ -1,0 +1,37 @@
+
+interface management0/0
+    management-only
+    nameif management
+    ip address dhcp setroute
+    no shutdown
+interface tengig 0/0
+    nameif outside
+    ip address 172.16.${pod_number}.15 255.255.255.224
+    no shutdown
+interface tengig 0/1
+    nameif inside
+    ip address 172.16.${pod_number}.42 255.255.255.224
+    no shutdown
+route outside 0.0.0.0 0.0.0.0 172.16.${pod_number}.1 1
+hostname ASA01
+crypto key generate rsa mod 2048 noconfirm
+
+dns domain-lookup outside
+dns name-server 208.67.220.220 208.67.222.222
+
+ssh timeout 60
+ssh 0.0.0.0 0.0.0.0 inside
+ssh 0.0.0.0 0.0.0.0 management
+ssh 0.0.0.0 0.0.0.0 outside
+
+http server enable
+http 0.0.0.0 0.0.0.0 inside
+http 0.0.0.0 0.0.0.0 management
+
+http 0.0.0.0 0.0.0.0 outside
+
+enable password Cisco@159
+username admin password Cisco@159 privilege 15
+
+aaa authentication ssh console LOCAL
+aaa authentication http console LOCAL
