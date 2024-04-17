@@ -294,7 +294,7 @@ resource "aws_key_pair" "sshkeypair" {
 
 resource "aws_instance" "asav" {
   ami                 = data.aws_ami.asav.id
-  instance_type = "c5.xlarge"
+  instance_type = "c5.2xlarge"
    key_name      = "pod${var.pod_number}-keypair"
 
   network_interface {
