@@ -36,3 +36,5 @@ username pod${pod_number}-admin password Cisco@159 privilege 15
 aaa authentication ssh console LOCAL
 aaa authentication http console LOCAL
 aaa authentication enable console LOCAL
+
+aaa authorization exec LOCAL auto-enable
