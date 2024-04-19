@@ -41,7 +41,7 @@ resource "aws_vpc" "asa_vpc" {
   enable_dns_hostnames = true
   instance_tenancy     = "default"
   tags = {
-    Name = "pod${var.pod_number}-dc"
+    Name = "pod${var.pod_number}-asa-dc"
   }
 }
 
