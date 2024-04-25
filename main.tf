@@ -393,6 +393,14 @@ resource "aws_network_interface" "application_interface" {
   }
 }
 
+# Output
+output "asa-outside-public-ip" {
+  value = aws_eip.asa_outside-EIP.public_ip
+}
+
+output "asa-mgmt-public-ip" {
+  value = aws_eip.asa_mgmt-EIP.public_ip
+}
 
 
 #################################################################################################################################
