@@ -160,7 +160,7 @@ variable "aws_secret_key" {
 //////
 
 variable "ASA_version" {
-  default = "asav9-19-1"
+  default = "asav9-18-4-22"
 }
 
 # variable "keyname" {}
